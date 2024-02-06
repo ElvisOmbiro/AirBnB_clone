@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """The base class of the Airbnb"""
-import uuid
+from uuid import uuid4
 from datetime import datetime
 import models
 
@@ -16,8 +16,8 @@ class BaseModel:
             kwargs - arguments for the constructor of a
                         BaseModel
         attributes:
-            created_at - time an instance is created
-            upddated_at - time an instance is updated
+            created_at -assigns the current datetime an instance is created
+            upddated_at -assigns the current datetime an instance is updated
             id - universal unique identifier for
                     each instance created
         """
@@ -36,14 +36,14 @@ class BaseModel:
             models.storage.new(self)
 
     def save(self):
-        """Updates the public instance attribute
+        """This updates the public instance attribute
         'updated_at' with current datetime
         """
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        """Returns a dictionary containing all key/
+        """Returns the dictionary containing all key/
         values of '__dict__' of the instance
         """
         my_dict = dict(self.__dict__)
