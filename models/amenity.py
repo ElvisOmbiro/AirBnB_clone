@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""defines available amenities"""
+"""defines available Amenities"""
 from models.base_model import BaseModel
 
 
