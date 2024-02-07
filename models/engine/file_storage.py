@@ -9,15 +9,12 @@ class FileStorage():
 
     def all(self):
         """Returns the dictionary objects"""
-        if len(self.__objects) == 0:
-            return f""
-        else:
-            return self.__objects
+        return self.__objects
 
     def new(self, obj):
         """Sets a new object in __objects"""
         key = f"{obj.__class__.__name__}.{obj.id}"
-        self.__objects[key] = obj
+        self.__objects.update({key: obj})
 
     def save(self):
         """Serialises __objects to the JSON file path"""
