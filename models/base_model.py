@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """The base class of the Airbnb"""
-from uuid import uuid4
+import uuid
 from datetime import datetime
 import models
 
@@ -26,7 +26,7 @@ class BaseModel:
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
-        if len(kwargs) != 0:
+        if kwargs != None and len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
                     self.__dict__[key] = datetime.strptime(value, tformat)
