@@ -4,34 +4,35 @@ import json
 
 class FileStorage():
     """Class that takes care of storage of objects in JSON"""
-    __file_path = ""
-    __objects = {}
+    __file_path = "file.json"
+    __objects = dict()
 
     def all(self):
         """Returns the dictionary objects"""
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """Sets a new object in __objects"""
         key = f"{obj.__class__.__name__}.{obj.id}"
-        self.__objects.update({key: obj.to_dict()})
+        FileStorage.__objects[key] = obj
 
     def save(self):
         """Serialises __objects to the JSON file path"""
-        #self.__file_path = self.__class__.__name__ + ".json"
-        if os.path.exists(self.__file_path):
-            #with open(self.__file_path, 'w+') as json_file:
-            print("Saving")
-            with open(self.__file_path, 'w') as json_file:
-                json.dump(self.__objects, json_file, indent=2)
-                print("Saved")
+        #if os.path.exists(FileStorage.__file_path):
+        print("In here")
+        d = {k: v.to_dict() for k, v in FileStorage.__objects.items()}
+        with open(FileStorage.__file_path, 'w', encoding="utf-8") as f:
+            json.dump(d, f)
 
     def reload(self):
         """Deserialises __objects from the JSON file path"""
-        #self.__file_path = self.__class__.__name__ + ".json"
-        if os.path.exists(self.__file_path):
-            #with open(self.__file_path, 'r') as json_file:
-            print("Loading")
-            with open(self.__file_path, 'r') as json_file:
-                self.__objects = json.load(json_file)
-                print("Loaded")
+        #if os.path.exists(FileStorage.__file_path):
+        from ..base_model import BaseModel
+        try:
+            with open(FileStorage.__file_path, 'r', encoding="utf-8") as f:
+                dict_data = json.load(f)
+                for k, v in dict_data.items():
+                    class_name = eval(v["__class__"])
+                    FileStorage.__objects[k] = class_name(**v)
+        except FileNotFoundError:
+            pass
