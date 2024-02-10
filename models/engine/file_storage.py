@@ -22,8 +22,18 @@ class FileStorage():
             json.dump(d, f)
 
     def reload(self):
-        """Deserialises __objects from the JSON file path"""
+        """Deserialises __objects from the JSON FileStorage
+        This method runs everytime the console starts up
+        """
+
         from ..base_model import BaseModel
+        #from ..amenity import Amenity
+        #from ..city import City
+        #from ..place import Place
+        #from ..review import Review
+        #from ..state import State
+        #from ..user import User
+
         try:
             with open(FileStorage.__file_path, 'r', encoding="utf-8") as f:
                 dict_data = json.load(f)
