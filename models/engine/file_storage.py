@@ -1,6 +1,14 @@
 #!/usr/bin/python3
 import json
 
+from ..base_model import BaseModel
+from ..amenity import Amenity
+from ..city import City
+from ..place import Place
+from ..review import Review
+from ..state import State
+from ..user import User
+
 class FileStorage():
     """Class that takes care of storage of objects in JSON"""
     __file_path = "file.json"
@@ -25,14 +33,6 @@ class FileStorage():
         """Deserialises __objects from the JSON FileStorage
         This method runs everytime the console starts up
         """
-
-        from ..base_model import BaseModel
-        #from ..amenity import Amenity
-        #from ..city import City
-        #from ..place import Place
-        #from ..review import Review
-        #from ..state import State
-        #from ..user import User
 
         try:
             with open(FileStorage.__file_path, 'r', encoding="utf-8") as f:
