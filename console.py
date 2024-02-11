@@ -19,8 +19,8 @@ class HBNBCommand(cmd.Cmd):
     """This is the entry point of the interpreter"""
 
     prompt = "(hbnb) "
-    classes = {"BaseModel", "User", "State", "City",
-               "Amenity", "Place", "Review"}
+    classes = ["BaseModel", "User", "State", "City",
+               "Amenity", "Place", "Review"]
 
     def do_quit(self, arg):
         """Quit command to exit the program."""
@@ -36,10 +36,10 @@ class HBNBCommand(cmd.Cmd):
         """
         if line == "" or line is None:
             print("** class name missing **")
-        elif line not in storage.classes():
+        elif line not in self.classes:
             print("** class doesn't exist **")
         else:
-            r = storage.classes()[line]()
+            r = (eval(line))()
             r.save()
             print(r.id)
 
