@@ -14,12 +14,13 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
     """This is the entry point of the interpreter"""
 
     prompt = "(hbnb) "
     classes = {"BaseModel", "User", "State", "City",
-                   "Amenity", "Place", "Review"}
+               "Amenity", "Place", "Review"}
 
     def do_quit(self, arg):
         """Quit command to exit the program."""
@@ -41,6 +42,7 @@ class HBNBCommand(cmd.Cmd):
             r = storage.classes()[line]()
             r.save()
             print(r.id)
+
     def emptyline(self):
         """Overwrite default behavior to repeat last cmd"""
 
@@ -70,12 +72,13 @@ class HBNBCommand(cmd.Cmd):
         try:
             if argu[1]:
                 keys = "{}.{}".format(argu[0], argu[1])
-                if keys not in objedict ().keys():
+                if keys not in objedict().keys():
                     print("** no instance found **")
                 else:
                     print(objedict()[keys])
         except IndexError:
             print("** instance id missing **")
+
     def do_destroy(self, arg):
         """Destroys an instance based on the class name and id
         Exceptions; save changes to JSON file
@@ -106,7 +109,6 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
-
     def do_all(self, line):
         """Prints all string representation of all instances
         Exceptions:
@@ -124,6 +126,7 @@ class HBNBCommand(cmd.Cmd):
             print(obj_list)
         else:
             print("** class doesn't exist **")
+
     def do_update(self, line):
         """Update if given exact object, exact attribute"""
         args = parse(line)

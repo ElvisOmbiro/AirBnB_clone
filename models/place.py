@@ -3,6 +3,7 @@
 
 from models.base_model import BaseModel
 
+
 class Place(BaseModel):
     """Represents the place
 
@@ -31,4 +32,3 @@ class Place(BaseModel):
     number_bathrooms = 0
     max_guest = 0
     price_by_night = 0
-

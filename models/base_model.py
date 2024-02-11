@@ -23,7 +23,7 @@ class BaseModel:
         """
         tformat = '%Y-%m-%dT%H:%M:%S.%f'
 
-        if kwargs != None and len(kwargs) != 0:
+        if kwargs is not None and len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
                     self.__dict__[key] = datetime.strptime(value, tformat)
