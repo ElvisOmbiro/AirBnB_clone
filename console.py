@@ -64,7 +64,7 @@ class HBNBCommand(cmd.Cmd):
         if len(line) == 0:
             print("** class name missing **")
             return
-        argu = parse(line)
+        argu = line.split()
         objedict = storage.all()
         if argu[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
@@ -72,10 +72,10 @@ class HBNBCommand(cmd.Cmd):
         try:
             if argu[1]:
                 keys = "{}.{}".format(argu[0], argu[1])
-                if keys not in objedict().keys():
+                if keys not in objedict.keys():
                     print("** no instance found **")
                 else:
-                    print(objedict()[keys])
+                    print(objedict[keys])
         except IndexError:
             print("** instance id missing **")
 
