@@ -79,16 +79,16 @@ class HBNBCommand(cmd.Cmd):
         except IndexError:
             print("** instance id missing **")
 
-    def do_destroy(self, arg):
+    def do_destroy(self, line):
         """Destroys an instance based on the class name and id
         Exceptions; save changes to JSON file
 
         """
-        argu = parse(line)
+        argu = line.split()
         objedict = storage.all()
         if len(argu) == 0:
             print("** class name missing **")
-        elif argu[0] not in HBNBCommand.all_classes:
+        elif argu[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
         elif len(argu) == 1:
             print("** instance id missing **")
