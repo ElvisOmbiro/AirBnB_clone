@@ -39,6 +39,7 @@ class FileStorage():
                 dict_data = json.load(f)
                 for k, v in dict_data.items():
                     class_name = eval(v["__class__"])
+                    del v['__class__']
                     FileStorage.__objects[k] = class_name(**v)
         except FileNotFoundError:
             pass

@@ -13,6 +13,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+from models.engine.file_storage import FileStorage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -113,23 +114,27 @@ class HBNBCommand(cmd.Cmd):
         """Prints all string representation of all instances
         Exceptions:
             NameError: when no object with that name"""
-        args = parse(line)
+        args = line.split()
         obj_list = []
         if len(line) == 0:
             for objs in storage.all().values():
-                obj_list.append(objs)
+                obj_list.append(objs.__str__())
             print(obj_list)
         elif args[0] in HBNBCommand.classes:
             for key, objs in storage.all().items():
+                storage.reload()
                 if args[0] in key:
-                    obj_list.append(objs)
+                    reg = r" ,'__class__': '[A-Za-z]+'"
+                    import re
+                    cp = re.sub(reg, '', f"{objs.__str__()}")
+                    obj_list.append(cp)
             print(obj_list)
         else:
             print("** class doesn't exist **")
 
     def do_update(self, line):
         """Update if given exact object, exact attribute"""
-        args = parse(line)
+        args = line.split()
         if len(args) >= 4:
             key = "{}.{}".format(args[0], args[1])
             cast = type(eval(args[3]))
