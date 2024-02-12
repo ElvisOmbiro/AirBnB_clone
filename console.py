@@ -4,6 +4,7 @@ Official,Here We Go
 """
 import cmd
 import json
+import sys
 from datetime import datetime
 from models.base_model import BaseModel
 from models import storage
@@ -22,6 +23,32 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     classes = ["BaseModel", "User", "State", "City",
                "Amenity", "Place", "Review"]
+
+    """
+    def precmd(self, line):
+        clas, rest = line.split('.', 1)
+        meth, argu = rest.split('(', 1)
+        argu = argu[:-1]
+        if clas not in self.classes:
+            print("** class doesn't exist **")
+        else:
+            line = f"{meth} {clas}" + argu
+        return cmd.Cmd.precmd(self, line)
+    """
+    def precmd(self, line):
+        """METHODS CANNOT TAKE ARGUMENTS STILL!!"""
+        if not sys.stdin.isatty():
+            print()
+        if '.' in line:
+            clas, rest = line.split('.', 1)
+            meth, argu = rest.split('(', 1)
+            argu = argu[:-1]
+            if clas.strip() in self.classes:
+                line = f"{meth.strip()} {clas.strip()} {argu.strip()}"
+            else:
+                print("** class doesn't exist **")
+
+        return cmd.Cmd.precmd(self, line)
 
     def do_quit(self, arg):
         """Quit command to exit the program."""
