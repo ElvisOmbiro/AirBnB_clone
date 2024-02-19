@@ -43,10 +43,17 @@ class HBNBCommand(cmd.Cmd):
             clas, rest = line.split('.', 1)
             meth, argu = rest.split('(', 1)
             argu = argu[:-1]
+<<<<<<< HEAD
             if clas not in self.classes:
                 print("** class doesn't exist **")
             else:
                 line = f"{meth} {clas}" + argu
+=======
+            if clas.strip() in self.classes:
+                line = f"{meth.strip()} {clas.strip()} {argu.strip()}"
+            else:
+                print("** class doesn't exist **")
+>>>>>>> 475e3649d2bc5431ecd788e76da9e396117022d9
 
         return cmd.Cmd.precmd(self, line)
 
